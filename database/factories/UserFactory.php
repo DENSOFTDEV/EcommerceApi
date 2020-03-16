@@ -28,8 +28,8 @@ $factory->define(User::class, function (Faker $faker) {
         'email' => $faker->unique()->safeEmail,
         'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         'remember_token' => Str::random(10),
-        'verified' => $verified = $faker->randomElement([User::VERIDIED_USER, User::UNVERIDIED_USER]),
-        'verification_token' => $verified == User::VERIDIED_USER ? null : User:: generateVerificationCode(),
+        'verified' => $verified = $faker->randomElement([User::VERIFIED_USER, User::UNVERIFIED_USER]),
+        'verification_token' => $verified == User::VERIFIED_USER ? null : User:: generateVerificationCode(),
         'admin' => $verified = $faker->randomElement([User::ADMIN_USER, User::REGULAR_USER]),
     ];
 });

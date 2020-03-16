@@ -2,17 +2,20 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, SoftDeletes;
+
+    protected $dates = ['deleted_at'];
 
     protected $table = 'users';
 
-    const VERIDIED_USER = '1';
-    const UNVERIDIED_USER = '2';
+    const VERIFIED_USER = '1';
+    const UNVERIFIED_USER = '0';
 
     const ADMIN_USER = 'true';
     const REGULAR_USER = 'false';
@@ -39,9 +42,26 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function setNameAttribute($name)
+    {
+        $this->attributes['name'] = strtolower($name);
+    }
+
+
+    public function getNameAttribute($name)
+    {
+        return ucwords($name);
+    }
+
+    public function setEmailAttribute($email)
+    {
+        $this->attributes['email'] = strtolower($email);
+    }
+
+
     public function isVerified()
     {
-        return $this->verified == User::VERIDIED_USER;
+        return $this->verified == User::VERIFIED_USER;
     }
 
     public function isAdmin()
