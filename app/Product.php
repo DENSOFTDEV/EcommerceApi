@@ -15,6 +15,11 @@ class Product extends Model
 
 
     protected $dates = ['deleted_at'];
+
+    protected $hidden = [
+        'pivot'
+    ];
+
     protected $fillable = [
         'name',
         'description',
