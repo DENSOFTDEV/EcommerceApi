@@ -4,9 +4,12 @@ namespace App;
 
 
 use App\Scopes\BuyerScope;
+use App\Transformers\BuyerTransfomer;
 
 class Buyer extends User
 {
+
+    public $transformer = BuyerTransfomer::class;
 
     public static function boot()
     {
