@@ -7,6 +7,7 @@ use App\Http\Middleware\CheckForMaintenanceMode;
 use App\Http\Middleware\EncryptCookies;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Middleware\SignatureMiddleware;
+use App\Http\Middleware\TransformInput;
 use App\Http\Middleware\TrimStrings;
 use App\Http\Middleware\TrustProxies;
 use App\Http\Middleware\VerifyCsrfToken;
@@ -84,6 +85,7 @@ class Kernel extends HttpKernel
         'throttle' => ThrottleRequests::class,
         'verified' => EnsureEmailIsVerified::class,
         'signature' => SignatureMiddleware::class,
+        'transform.input' => TransformInput::class,
     ];
 
     /**
